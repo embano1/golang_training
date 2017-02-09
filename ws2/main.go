@@ -59,7 +59,7 @@ func defaulthandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, "Hello surfer!")
 }
 
-// Another function for out webserver
+// Another function for our webserver
 func infohandler(w http.ResponseWriter, r *http.Request) {
 
 	// Get the hostname using a call to os package
