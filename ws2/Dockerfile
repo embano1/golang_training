@@ -1,6 +1,6 @@
 FROM scratch
-MAINTAINER Michael Gasch <michael_gasch@live.com>
-ADD ws2 /
+LABEL MAINTAINER="Michael Gasch <embano1@live.com>"
+ADD ws /
 ENV PORT 8000
 EXPOSE 8000
-ENTRYPOINT ["/ws2"]
+ENTRYPOINT ["/ws"]

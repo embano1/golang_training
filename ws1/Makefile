@@ -1,15 +1,21 @@
+REPO?=embano1/go-web
+VERSION?=v1
+TAG?=$(shell git rev-list HEAD --max-count=1 --abbrev-commit)
+
 default: builddocker
 
 buildgo:
-	CGO_ENABLED=0 GOOS=linux go build -a -ldflags '-w' -o ws1 .
+	CGO_ENABLED=0 GOOS=linux go build -ldflags '-w' -o ws .
 
 builddocker: buildgo
-	docker build -t localhost:5000/ws1 .
+	docker build -t ${REPO}${VERSION}:${TAG} .
+	docker tag ${REPO}${VERSION}:${TAG} ${REPO}${VERSION}:latest 
 
 pushdocker:
-	docker push localhost:5000/ws1
+	docker push ${REPO}${VERSION}:${TAG}
+	docker push ${REPO}${VERSION}:latest
 
 cleanup:
 	rm ws1
 
-buildrelease: buildgo builddocker pushdocker cleanup
+release: buildgo builddocker pushdocker cleanup
